@@ -12,72 +12,77 @@ public class Data {
     private Product[] products = new Product[10];
     private Sell[] sells = new Sell[10];
 
-    private Data(){}
+    private Data() {
+    }
 
-    public static Data getInstance(){
-        if(data==null){
+    public static Data getInstance() {
+        if (data == null) {
             data = new Data();
         }
         return data;
     }
 
-    public void addProduct(Product product){
-        if(p>=products.length) increaseProductArray();
-        products[p++]=product;
+    public void addProduct(Product product) {
+        if (p >= products.length) increaseProductArray();
+        products[p++] = product;
     }
-    public void sellProduct(String name,int count,Product product){
-        if(product.getCount()<count){
+
+    public void sellProduct(String name, int count, Product product) {
+        if (product.getCount() < count) {
             System.out.println("\u001B[31m" + "the quantity of the product is not enough!" + "\u001B[0m");
             return;
         }
         product.subCount(count);
-        addSell(new Sell(new Product(product.getName(),count,product.getPrice())));
+        addSell(new Sell(new Product(product.getName(), count, product.getPrice())));
         System.out.println("Success");
     }
-    public void addSell(Sell sell){
-        if(s>=sells.length) increaseSellArray();
-        sells[s++]= sell;
+
+    public void addSell(Sell sell) {
+        if (s >= sells.length) increaseSellArray();
+        sells[s++] = sell;
     }
-    public void updateSell(Sell sell,int count){
+
+    public void updateSell(Sell sell, int count) {
         Product product = this.getProductFromName(sell.getProduct().getName());
-        if(product!=null){
+        if (product != null) {
             Product productInSell = sell.getProduct();
-            if(productInSell.getCount()>count){
-                product.addCount(sell.getProduct().getCount()-count);
+            if (productInSell.getCount() > count) {
+                product.addCount(sell.getProduct().getCount() - count);
                 productInSell.setCount(count);
                 System.out.println("Success");
-            }else if (productInSell.getCount()!=count){
-                if(product.getCount()>=count-productInSell.getCount()) {
+            } else if (productInSell.getCount() != count) {
+                if (product.getCount() >= count - productInSell.getCount()) {
                     product.subCount(count - productInSell.getCount());
                     productInSell.setCount(count);
                     System.out.println("Success");
-                }else
+                } else
                     System.out.println("\u001B[31m" + "the quantity of the product is not enough!" + "\u001B[0m");
             }
-        }else
+        } else
             System.out.println("\u001B[31m" + "not possible, since this product is cleared from the data!" + "\u001B[0m");
     }
 
-    public Product getProductFromName(String name){
-        for(int i = 0;i<products.length;i++){
-            if (products[i]!=null&&products[i].getName().equalsIgnoreCase(name)) {
+    public Product getProductFromName(String name) {
+        for (int i = 0; i < products.length; i++) {
+            if (products[i] != null && products[i].getName().equalsIgnoreCase(name)) {
                 return products[i];
             }
         }
         return null;
     }
-    public Sell getSellFromId(int id){
-        for(int i = 0;i< sells.length;i++){
-            if(sells[i]!=null&&sells[i].getId()==id){
+
+    public Sell getSellFromId(int id) {
+        for (int i = 0; i < sells.length; i++) {
+            if (sells[i] != null && sells[i].getId() == id) {
                 return sells[i];
             }
         }
         return null;
     }
 
-    public void removeProduct(String name){
-        for(int i = 0;i<products.length;i++){
-            if(products[i]!=null&&products[i].getName().equalsIgnoreCase(name)){
+    public void removeProduct(String name) {
+        for (int i = 0; i < products.length; i++) {
+            if (products[i] != null && products[i].getName().equalsIgnoreCase(name)) {
                 products[i] = products[--p];
                 products[p] = null;
                 System.out.println("Success");
@@ -87,9 +92,10 @@ public class Data {
         System.out.println("\u001B[31m" + "such a product with a name does not exist!" + "\u001B[0m");
 
     }
-    public void removeSell(int id){
-        for(int i = 0;i<sells.length;i++){
-            if(sells[i]!=null&&sells[i].getId()==id){
+
+    public void removeSell(int id) {
+        for (int i = 0; i < sells.length; i++) {
+            if (sells[i] != null && sells[i].getId() == id) {
                 sells[i] = sells[--s];
                 sells[s] = null;
                 System.out.println("Success");
@@ -102,20 +108,22 @@ public class Data {
     public Product[] getProducts() {
         return products;
     }
+
     public Sell[] getSells() {
         return sells;
     }
 
-    private void increaseProductArray(){
-        Product[] newProducts = new Product[(int)(products.length*1.5+1)];
-        for(int i = 0;i<products.length;i++){
+    private void increaseProductArray() {
+        Product[] newProducts = new Product[(int) (products.length * 1.5 + 1)];
+        for (int i = 0; i < products.length; i++) {
             newProducts[i] = products[i];
         }
         products = newProducts;
     }
-    private void increaseSellArray(){
-        Sell[] newSells = new Sell[(int)(sells.length*1.5+1)];
-        for(int i = 0;i<sells.length;i++){
+
+    private void increaseSellArray() {
+        Sell[] newSells = new Sell[(int) (sells.length * 1.5 + 1)];
+        for (int i = 0; i < sells.length; i++) {
             newSells[i] = sells[i];
         }
         sells = newSells;

@@ -3,6 +3,7 @@ package model;
 public class Sell {
     private int id;
     private Product product;
+
     {
         id++;
     }
@@ -25,6 +26,6 @@ public class Sell {
 
     @Override
     public String toString() {
-        return "sellId: "+id+", Product info: "+product.toString();
+        return "sellId: " + id + ", Product info: " + product.toString();
     }
 }
