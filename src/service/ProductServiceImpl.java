@@ -5,14 +5,8 @@ import model.Product;
 import service.interfaces.ProductService;
 
 public class ProductServiceImpl implements ProductService {
-    public static ProductService productService = null;
+    public static final ProductService PRODUCT_SERVICE = new ProductServiceImpl();
     private ProductServiceImpl(){}
-    public static ProductService getInstance(){
-        if(productService==null){
-            return new ProductServiceImpl();
-        }
-        return productService;
-    }
     @Override
     public void addProduct(String name,int count,double price) {
         Data.getInstance().addProduct(new Product(name,count,price));

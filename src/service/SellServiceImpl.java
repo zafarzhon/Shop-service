@@ -6,14 +6,9 @@ import model.Sell;
 import service.interfaces.SellService;
 
 public class SellServiceImpl implements SellService {
-    public static SellService sellService = null;
+    public static final SellService SELL_SERVICE = new SellServiceImpl();
     private SellServiceImpl(){}
-    public static SellService getInstance(){
-        if(sellService==null){
-            sellService = new SellServiceImpl();
-        }
-        return sellService;
-    }
+
     @Override
     public void sell(String name, int count) {
         Product product = Data.getInstance().getProductFromName(name);

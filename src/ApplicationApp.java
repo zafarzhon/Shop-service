@@ -8,8 +8,8 @@ import service.interfaces.SellService;
 import java.util.Scanner;
 
 public class ApplicationApp {
-    static ProductService productService = ProductServiceImpl.getInstance();
-    static SellService sellService = SellServiceImpl.getInstance();
+    static ProductService productService = ProductServiceImpl.PRODUCT_SERVICE;
+    static SellService sellService = SellServiceImpl.SELL_SERVICE;
 
     public static void main(String[] args) {
         // for test
