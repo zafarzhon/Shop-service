@@ -25,9 +25,10 @@ public class ApplicationApp {
         int command = -1;
         while (command!=0){
             System.out.println(
-                    "1 => Product service\n" +
-                    "2 => Sell service\n" +
-                    "0 => Exit in program");
+                    """
+                            1 => Product service
+                            2 => Sell service
+                            0 => Exit in program""");
             System.out.print("Enter command: ");
             command = Integer.parseInt(sc.nextLine());
             System.out.println("--------------------------------------------------------------------------------");
@@ -36,11 +37,12 @@ public class ApplicationApp {
                 case 1:
                     while (temp!=0){
                         System.out.println(
-                                "1 => add product\n" +
-                                        "2 => change product\n" +
-                                        "3 => delete product\n" +
-                                        "4 => view products\n" +
-                                        "0 => close"
+                                """
+                                        1 => add product
+                                        2 => change product
+                                        3 => delete product
+                                        4 => view products
+                                        0 => close"""
                         );
                         System.out.println("--------------------------------------------------------------------------------");
                         System.out.print("Enter command: ");
@@ -57,11 +59,12 @@ public class ApplicationApp {
                 case 2:
                     while (temp!=0){
                         System.out.println(
-                                "1 => sell product\n" +
-                                        "2 => edit sell\n" +
-                                        "3 => delete sell\n" +
-                                        "4 => view sell\n" +
-                                        "0 => close"
+                                """
+                                        1 => sell product
+                                        2 => edit sell
+                                        3 => delete sell
+                                        4 => view sell
+                                        0 => close"""
                         );
                         System.out.println("--------------------------------------------------------------------------------");
                         System.out.print("Enter command: ");
@@ -117,7 +120,7 @@ public class ApplicationApp {
         int i = 0;
         for(Product product: products){
             if(product==null) continue;
-            System.out.println(++i+". "+product.toString());
+            System.out.println(++i+". "+product);
         }
         System.out.println("--------------------------------------------------------------------------------");
     }
@@ -153,7 +156,7 @@ public class ApplicationApp {
         int i = 0;
         for(Sell sell: sells){
             if(sell==null) continue;
-            System.out.println(++i+". "+sell.toString());
+            System.out.println(++i+". "+sell);
         }
         System.out.println("--------------------------------------------------------------------------------");
     }

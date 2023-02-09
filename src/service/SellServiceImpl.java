@@ -5,10 +5,8 @@ import model.Product;
 import model.Sell;
 import service.interfaces.SellService;
 
-public class SellServiceImpl implements SellService {
-    public static final SellService SELL_SERVICE = new SellServiceImpl();
-    private SellServiceImpl(){}
-
+public enum SellServiceImpl implements SellService {
+    SELL_SERVICE;
     @Override
     public void sell(String name, int count) {
         Product product = Data.getInstance().getProductFromName(name);

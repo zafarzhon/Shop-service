@@ -4,9 +4,8 @@ import data.Data;
 import model.Product;
 import service.interfaces.ProductService;
 
-public class ProductServiceImpl implements ProductService {
-    public static final ProductService PRODUCT_SERVICE = new ProductServiceImpl();
-    private ProductServiceImpl(){}
+public enum ProductServiceImpl implements ProductService {
+    PRODUCT_SERVICE;
     @Override
     public void addProduct(String name,int count,double price) {
         Data.getInstance().addProduct(new Product(name,count,price));
