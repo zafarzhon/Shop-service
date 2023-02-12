@@ -3,7 +3,10 @@ package data;
 import model.Product;
 import model.Sell;
 
-public class Data {
+import java.util.Arrays;
+
+public enum Data    {
+    DATA;
 
     private int p;
     private int s;
@@ -12,15 +15,6 @@ public class Data {
     private Product[] products = new Product[10];
     private Sell[] sells = new Sell[10];
 
-    private Data() {
-    }
-
-    public static Data getInstance() {
-        if (data == null) {
-            data = new Data();
-        }
-        return data;
-    }
 
     public void addProduct(Product product) {
         if (p >= products.length) increaseProductArray();
@@ -106,11 +100,11 @@ public class Data {
     }
 
     public Product[] getProducts() {
-        return products;
+        return Arrays.copyOf(products,p);
     }
 
     public Sell[] getSells() {
-        return sells;
+        return Arrays.copyOf(sells,s);
     }
 
     private void increaseProductArray() {

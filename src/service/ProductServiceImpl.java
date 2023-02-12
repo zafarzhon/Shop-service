@@ -9,12 +9,12 @@ public enum ProductServiceImpl implements ProductService {
 
     @Override
     public void addProduct(String name, int count, double price) {
-        Data.getInstance().addProduct(new Product(name, count, price));
+        Data.DATA.addProduct(new Product(name, count, price));
     }
 
     @Override
     public void updateProduct(String name, int count, double price) {
-        Product product = Data.getInstance().getProductFromName(name);
+        Product product = Data.DATA.getProductFromName(name);
         if (product != null) {
             product.setCount(count);
             product.setPrice(price);
@@ -24,11 +24,11 @@ public enum ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(String name) {
-        Data.getInstance().removeProduct(name);
+        Data.DATA.removeProduct(name);
     }
 
     @Override
     public Product[] getProductList() {
-        return Data.getInstance().getProducts();
+        return Data.DATA.getProducts();
     }
 }

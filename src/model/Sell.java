@@ -1,10 +1,18 @@
 package model;
 
+import data.Data;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Sell {
     private int id;
     private Product product;
 
+    private final LocalDateTime localDateTime;
+
     {
+        localDateTime = LocalDateTime.now();
         id++;
     }
 
@@ -24,8 +32,12 @@ public class Sell {
         this.product = product;
     }
 
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
     @Override
     public String toString() {
-        return "sellId: " + id + ", Product info: " + product.toString();
+        return "Id: " + id + "\n   Product info: " + product.toString()+"\n   "+"Time: "+localDateTime.format(DateTimeFormatter.ofPattern("E, dd MMM yyyy hh:mm:ss"));
     }
 }

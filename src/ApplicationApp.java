@@ -1,15 +1,20 @@
 import model.Product;
 import model.Sell;
 import service.ProductServiceImpl;
+import service.ReportService;
 import service.SellServiceImpl;
 import service.interfaces.ProductService;
 import service.interfaces.SellService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class ApplicationApp {
     static ProductService productService = ProductServiceImpl.PRODUCT_SERVICE;
     static SellService sellService = SellServiceImpl.SELL_SERVICE;
+
+    static ReportService reportService = ReportService.REPORT_SERVICE;
 
     public static void main(String[] args) {
         // for test
@@ -28,10 +33,11 @@ public class ApplicationApp {
                     """
                             1 => Product service
                             2 => Sell service
+                            3 => Report service
                             0 => Exit in program""");
             System.out.print("Enter command: ");
             command = Integer.parseInt(sc.nextLine());
-            System.out.println("--------------------------------------------------------------------------------");
+            space();
             int temp = -1;
             switch (command) {
                 case 1:
@@ -44,7 +50,7 @@ public class ApplicationApp {
                                         4 => view products
                                         0 => close"""
                         );
-                        System.out.println("--------------------------------------------------------------------------------");
+                        space();
                         System.out.print("Enter command: ");
                         temp = Integer.parseInt(sc.nextLine());
                         switch (temp) {
@@ -66,7 +72,7 @@ public class ApplicationApp {
                                         4 => view sell
                                         0 => close"""
                         );
-                        System.out.println("--------------------------------------------------------------------------------");
+                        space();
                         System.out.print("Enter command: ");
                         temp = Integer.parseInt(sc.nextLine());
                         switch (temp) {
@@ -74,6 +80,28 @@ public class ApplicationApp {
                             case 2 -> updateSell(sc);
                             case 3 -> deleteSell(sc);
                             case 4 -> printSells();
+                            default -> System.out.print(temp == 0 ? "" : "non-existent command\n");
+                        }
+                    }
+                    break;
+                case 3:
+                    while (temp != 0) {
+                        System.out.println(
+                                """
+                                        1 => report by today
+                                        2 => report last hour
+                                        3 => report by week of year
+                                        4 => report by month and year
+                                        0 => close"""
+                        );
+                        space();
+                        System.out.print("Enter command: ");
+                        temp = Integer.parseInt(sc.nextLine());
+                        switch (temp) {
+                            case 1 -> reportToday();
+                            case 2 -> reportLastHour();
+                            //case 3 -> deleteSell(sc);
+                            //case 4 -> printSells();
                             default -> System.out.print(temp == 0 ? "" : "non-existent command\n");
                         }
                     }
@@ -118,14 +146,14 @@ public class ApplicationApp {
     }
 
     public static void printProducts() {
-        System.out.println("--------------------------------------------------------------------------------");
+        space();
         Product[] products = productService.getProductList();
         int i = 0;
         for (Product product : products) {
             if (product == null) continue;
             System.out.println(++i + ". " + product);
         }
-        System.out.println("--------------------------------------------------------------------------------");
+        space();
     }
 
     // for sell service
@@ -157,13 +185,25 @@ public class ApplicationApp {
     }
 
     public static void printSells() {
-        System.out.println("--------------------------------------------------------------------------------");
+        space();
         Sell[] sells = sellService.getSellList();
         int i = 0;
         for (Sell sell : sells) {
             if (sell == null) continue;
             System.out.println(++i + ". " + sell);
         }
+        space();
+    }
+
+    // for report service
+
+    public static void reportToday(){
+        System.out.println(reportService.sumOfDay(LocalDate.now()));
+    }
+    public static void reportLastHour(){
+        System.out.println(reportService.sumOfLastHour(LocalDateTime.now()));
+    }
+    private static void space(){
         System.out.println("--------------------------------------------------------------------------------");
     }
 
