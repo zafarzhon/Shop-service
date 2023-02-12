@@ -5,7 +5,7 @@ import model.Sell;
 
 import java.util.Arrays;
 
-public enum Data    {
+public enum Data {
     DATA;
 
     private int p;
@@ -100,11 +100,11 @@ public enum Data    {
     }
 
     public Product[] getProducts() {
-        return Arrays.copyOf(products,p);
+        return Arrays.copyOf(products, p);
     }
 
     public Sell[] getSells() {
-        return Arrays.copyOf(sells,s);
+        return Arrays.copyOf(sells, s);
     }
 
     private void increaseProductArray() {

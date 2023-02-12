@@ -15,6 +15,7 @@ import java.time.ZoneId;
  */
 public enum ReportServiceImpl implements ReportService {
     REPORT_SERVICE;
+
     @Override
     public double sumOfDay(LocalDate localDate) {
         double sum = 0;
@@ -35,7 +36,7 @@ public enum ReportServiceImpl implements ReportService {
         Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
         for (Sell sell : sells) {
             if (sell == null) continue;
-            if (sell.getLocalDateTime().isBefore(localDateTime) && sell.getLocalDateTime().isAfter(localDateTime.minusHours(1))){
+            if (sell.getLocalDateTime().isBefore(localDateTime) && sell.getLocalDateTime().isAfter(localDateTime.minusHours(1))) {
                 Product product = sell.getProduct();
                 sum += product.getPrice() * product.getCount();
             }
@@ -49,7 +50,7 @@ public enum ReportServiceImpl implements ReportService {
         Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
         for (Sell sell : sells) {
             if (sell == null) continue;
-            if (sell.getLocalDateTime().getYear() == year &&  ((sell.getLocalDateTime().getDayOfYear() - 1) / 7) + 1 == weekOfYear){
+            if (sell.getLocalDateTime().getYear() == year && ((sell.getLocalDateTime().getDayOfYear() - 1) / 7) + 1 == weekOfYear) {
                 Product product = sell.getProduct();
                 sum += product.getPrice() * product.getCount();
             }
@@ -63,7 +64,7 @@ public enum ReportServiceImpl implements ReportService {
         Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
         for (Sell sell : sells) {
             if (sell == null) continue;
-            if (sell.getLocalDateTime().getYear() == year && sell.getLocalDateTime().getMonthValue()+1==monthYear){
+            if (sell.getLocalDateTime().getYear() == year && sell.getLocalDateTime().getMonthValue() + 1 == monthYear) {
                 Product product = sell.getProduct();
                 sum += product.getPrice() * product.getCount();
             }
@@ -78,7 +79,7 @@ public enum ReportServiceImpl implements ReportService {
         for (Sell sell : sells) {
             if (sell == null) continue;
             LocalDate sellDate = sell.getLocalDateTime().toLocalDate();
-            if (sellDate.isAfter(from)&& sellDate.isBefore(to)){
+            if (sellDate.isAfter(from) && sellDate.isBefore(to)) {
                 Product product = sell.getProduct();
                 sum += product.getPrice() * product.getCount();
             }
@@ -93,7 +94,7 @@ public enum ReportServiceImpl implements ReportService {
         for (Sell sell : sells) {
             if (sell == null) continue;
             LocalDateTime sellDate = sell.getLocalDateTime();
-            if (sellDate.isAfter(from)&& sellDate.isBefore(to)){
+            if (sellDate.isAfter(from) && sellDate.isBefore(to)) {
                 Product product = sell.getProduct();
                 sum += product.getPrice() * product.getCount();
             }
@@ -103,17 +104,17 @@ public enum ReportServiceImpl implements ReportService {
 
     @Override
     public double sumOfDay(LocalDate localDate, String zoneId) {
-        localDate = LocalDate.ofInstant(Instant.from(localDate),ZoneId.of(zoneId));
-        double sum = 0;
-        Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
-        for (Sell sell : sells) {
-            if (sell == null) continue;
-            LocalDate sellDate = sell.getLocalDateTime().toLocalDate();
-            if (sellDate.equals(localDate)){
-                Product product = sell.getProduct();
-                sum += product.getPrice() * product.getCount();
-            }
-        }
+//        localDate = LocalDate.ofInstant(Instant.from(localDate),ZoneId.of(zoneId));
+//        double sum = 0;
+//        Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
+//        for (Sell sell : sells) {
+//            if (sell == null) continue;
+//            LocalDate sellDate = sell.getLocalDateTime().toLocalDate();
+//            if (sellDate.equals(localDate)){
+//                Product product = sell.getProduct();
+//                sum += product.getPrice() * product.getCount();
+//            }
+//        }
         return 0;
     }
 }

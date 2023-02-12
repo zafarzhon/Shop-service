@@ -38,6 +38,6 @@ public class Sell {
 
     @Override
     public String toString() {
-        return "Id: " + id + "\n   Product info: " + product.toString()+"\n   "+"Time: "+localDateTime.format(DateTimeFormatter.ofPattern("E, dd MMM yyyy hh:mm:ss"));
+        return "Id: " + id + "\n   Product info: " + product.toString() + "\n   " + "Time: " + localDateTime.format(DateTimeFormatter.ofPattern("E, dd MMM yyyy hh:mm:ss"));
     }
 }

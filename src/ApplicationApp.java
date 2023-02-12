@@ -93,6 +93,9 @@ public class ApplicationApp {
                                         2 => report last hour
                                         3 => report by week of year
                                         4 => report by month and year
+                                        5 => report by date from to
+                                        6 => report by hours from to
+                                        7 => report by date with zoneId
                                         0 => close"""
                         );
                         space();
@@ -103,7 +106,9 @@ public class ApplicationApp {
                             case 2 -> reportLastHour();
                             case 3 -> reportByWeekOfYear(sc);
                             case 4 -> reportByMonthOfYear(sc);
-
+                            case 5 -> reportByDateFromTo(sc);
+                            case 6 -> reportByHoursFromTo(sc);
+                            case 7 -> reportByDateWithZoneId();
                             default -> System.out.print(temp == 0 ? "" : "non-existent command\n");
                         }
                     }
@@ -207,12 +212,6 @@ public class ApplicationApp {
         System.out.println(reportService.sumOfLastHour(LocalDateTime.now()));
     }
 
-    //    """
-//                                        1 => report by today
-//                                        2 => report last hour
-//                                        3 => report by week of year
-//                                        4 => report by month and year
-//                                        0 => close"""
     public static void reportByWeekOfYear(Scanner sc) {
         System.out.print("Enter week of year");
         int weekOfYear = Integer.parseInt(sc.nextLine());
@@ -229,7 +228,8 @@ public class ApplicationApp {
         int year = Integer.parseInt(sc.nextLine());
         System.out.println(reportService.sumOfMonth(monthOfYear, year));
     }
-    public static void reportByDateFromTo(Scanner sc){
+
+    public static void reportByDateFromTo(Scanner sc) {
         System.out.print("Enter day of month");
         int day1 = Integer.parseInt(sc.nextLine());
         System.out.print("Enter month number [1:12] of year");
@@ -242,9 +242,10 @@ public class ApplicationApp {
         int monthOfYear2 = Integer.parseInt(sc.nextLine());
         System.out.print("Enter year");
         int year2 = Integer.parseInt(sc.nextLine());
-        System.out.println(reportService.sum(LocalDate.of(year1,monthOfYear1,day1),LocalDate.of(year2,monthOfYear2,day2)));
+        System.out.println(reportService.sum(LocalDate.of(year1, monthOfYear1, day1), LocalDate.of(year2, monthOfYear2, day2)));
     }
-    public static void reportByHoursFromTo(Scanner sc){
+
+    public static void reportByHoursFromTo(Scanner sc) {
         System.out.print("Enter day of month");
         int day1 = Integer.parseInt(sc.nextLine());
         System.out.print("Enter month number [1:12] of year");
@@ -265,8 +266,13 @@ public class ApplicationApp {
         int hour2 = Integer.parseInt(sc.nextLine());
         System.out.print("Enter minute");
         int minutes2 = Integer.parseInt(sc.nextLine());
-        System.out.println(reportService.sumFromToHour(LocalDateTime.of(year1,monthOfYear1,day1,hour1,minutes1),LocalDateTime.of(year2,monthOfYear2,day2,hour2,minutes2)));
+        System.out.println(reportService.sumFromToHour(LocalDateTime.of(year1, monthOfYear1, day1, hour1, minutes1), LocalDateTime.of(year2, monthOfYear2, day2, hour2, minutes2)));
     }
+
+    public static void reportByDateWithZoneId() {
+        System.out.println(0);
+    }
+
     private static void space() {
         System.out.println("--------------------------------------------------------------------------------");
     }

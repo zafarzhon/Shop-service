@@ -9,10 +9,16 @@ import java.time.LocalDateTime;
  */
 public interface ReportService {
     double sumOfDay(LocalDate localDate);
+
     double sumOfLastHour(LocalDateTime localDateTime);
-    double sumOfWeekYear(int weekOfYear,int year);
-    double sumOfMonth(int monthYear,int year);
+
+    double sumOfWeekYear(int weekOfYear, int year);
+
+    double sumOfMonth(int monthYear, int year);
+
     double sum(LocalDate from, LocalDate to);
+
     double sumFromToHour(LocalDateTime from, LocalDateTime to);
+
     double sumOfDay(LocalDate localDate, String zoneId);
 }
