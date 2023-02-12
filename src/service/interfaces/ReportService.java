@@ -2,13 +2,12 @@ package service.interfaces;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * @author Odilov_Zafarjon
  * @link https://t.me/zafarzhon_odilov
  */
-public interface ReportSell {
+public interface ReportService {
     double sumOfDay(LocalDate localDate);
     double sumOfLastHour(LocalDateTime localDateTime);
     double sumOfWeekYear(int weekOfYear,int year);

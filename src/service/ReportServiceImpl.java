@@ -2,17 +2,18 @@ package service;
 
 import model.Product;
 import model.Sell;
-import service.interfaces.ReportSell;
+import service.interfaces.ReportService;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.ZoneId;
 
 /**
  * @author Odilov_Zafarjon
  * @link https://t.me/zafarzhon_odilov
  */
-public enum ReportService implements ReportSell {
+public enum ReportServiceImpl implements ReportService {
     REPORT_SERVICE;
     @Override
     public double sumOfDay(LocalDate localDate) {
@@ -72,16 +73,47 @@ public enum ReportService implements ReportSell {
 
     @Override
     public double sum(LocalDate from, LocalDate to) {
-        return 0;
+        double sum = 0;
+        Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
+        for (Sell sell : sells) {
+            if (sell == null) continue;
+            LocalDate sellDate = sell.getLocalDateTime().toLocalDate();
+            if (sellDate.isAfter(from)&& sellDate.isBefore(to)){
+                Product product = sell.getProduct();
+                sum += product.getPrice() * product.getCount();
+            }
+        }
+        return sum;
     }
 
     @Override
     public double sumFromToHour(LocalDateTime from, LocalDateTime to) {
-        return 0;
+        double sum = 0;
+        Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
+        for (Sell sell : sells) {
+            if (sell == null) continue;
+            LocalDateTime sellDate = sell.getLocalDateTime();
+            if (sellDate.isAfter(from)&& sellDate.isBefore(to)){
+                Product product = sell.getProduct();
+                sum += product.getPrice() * product.getCount();
+            }
+        }
+        return sum;
     }
 
     @Override
     public double sumOfDay(LocalDate localDate, String zoneId) {
+        localDate = LocalDate.ofInstant(Instant.from(localDate),ZoneId.of(zoneId));
+        double sum = 0;
+        Sell[] sells = SellServiceImpl.SELL_SERVICE.getSellList();
+        for (Sell sell : sells) {
+            if (sell == null) continue;
+            LocalDate sellDate = sell.getLocalDateTime().toLocalDate();
+            if (sellDate.equals(localDate)){
+                Product product = sell.getProduct();
+                sum += product.getPrice() * product.getCount();
+            }
+        }
         return 0;
     }
 }
